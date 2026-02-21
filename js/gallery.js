@@ -85,7 +85,19 @@ const gallery = document.querySelector(".gallery");
 
 gallery.insertAdjacentHTML("beforeend", itemsTemplate(images));
 
-// const galleryLinks = document.querySelectorAll(".gallery-link");
-// galleryLinks.addEventListener("click", (e) => {
-//   e.preventDefault();
-// });
+gallery.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+
+  const instance = basicLightbox.create(`
+    <div class="modal">
+    <img
+        src="${event.target.dataset.source}" width = "1112" height = "600"
+      />
+    </div>
+`);
+
+  instance.show();
+});
